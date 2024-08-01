@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Course } from './entities/course.entity';
+import { CreateCourseDto } from './dto/create-course.dto';
+import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Injectable()
 export class CoursesService {
@@ -12,7 +14,7 @@ export class CoursesService {
     },
   ];
 
-  create(createCourseDto: any) {
+  create(createCourseDto: CreateCourseDto) {
     return this.courses.push(createCourseDto);
   }
 
@@ -31,15 +33,19 @@ export class CoursesService {
     return course;
   }
 
-  update(id: number, updateCourseDto: any) {
-    const alreadyExists = this.findOne(id);
+  update(id: number, updateCourseDto: UpdateCourseDto) {
+    const course = this.findOne(id);
 
-    if (alreadyExists !== undefined) {
-      const index = this.courses.findIndex((course) => course.id === id);
-      this.courses[index] = {
-        id,
-        ...updateCourseDto, //spread operator(...) que seria a desconstrução de course
+    if (course !== undefined) {
+      const updatedCourse = {
+        ...course,
+        ...updateCourseDto,
       };
+
+      const index = this.courses.findIndex((course) => course.id === id);
+      this.courses[index] = updatedCourse;
+
+      return updatedCourse;
     }
   }
 
