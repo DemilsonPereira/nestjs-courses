@@ -23,6 +23,9 @@ services:
       - '3333:3333'
     environment:
       - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
     depends_on:
       - db
     healthcheck:

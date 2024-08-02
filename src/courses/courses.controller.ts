@@ -18,8 +18,14 @@ export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
 
   @Post()
-  create(@Body() createCourseDto: CreateCourseDto) {
-    return this.coursesService.create(createCourseDto);
+  async create(@Body() createCourseDto: CreateCourseDto) {
+    const createCourse = await this.coursesService.create(createCourseDto);
+
+    if (createCourse) {
+      return {
+        message: 'Curso criado com sucesso',
+      };
+    }
   }
 
   @Get()
@@ -33,12 +39,27 @@ export class CoursesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.coursesService.update(+id, updateCourseDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateCourseDto: UpdateCourseDto,
+  ) {
+    const updateCourse = await this.coursesService.update(+id, updateCourseDto);
+
+    if (updateCourse) {
+      return {
+        message: 'Curso atualizado com sucesso',
+      };
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.coursesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const removeCourse = await this.coursesService.remove(+id);
+
+    if (removeCourse) {
+      return {
+        message: 'Curso removido com sucesso',
+      };
+    }
   }
 }

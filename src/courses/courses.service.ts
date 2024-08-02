@@ -27,7 +27,7 @@ export class CoursesService {
       where: { id },
     });
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} does not exist`);
+      throw new NotFoundException(`Curso com ID ${id} não existe!`);
     }
 
     return course;
@@ -40,7 +40,7 @@ export class CoursesService {
     });
 
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} does not exist`);
+      throw new NotFoundException(`Curso com ID ${id} não existe!`);
     }
 
     return this.courseRepository.save(course);
@@ -50,7 +50,7 @@ export class CoursesService {
     const course = await this.findOne(id);
 
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} does not exist`);
+      throw new NotFoundException(`Curso com ID ${id} não existe!`);
     }
 
     return this.courseRepository.remove(course);
