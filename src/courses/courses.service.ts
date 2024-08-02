@@ -13,7 +13,6 @@ export class CoursesService {
   ) {}
 
   async create(createCourseDto: CreateCourseDto) {
-    console.log("🚀 ~ CoursesService ~ create ~ createCourseDto:", createCourseDto)
     const course = this.courseRepository.create(createCourseDto);
 
     return this.courseRepository.save(course);
