@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
-import { UpdateCourseDto } from './dto/update-course.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateCourseDto } from './dto/update-course.dto';
 
 @ApiTags('Courses')
 @Controller('courses')
