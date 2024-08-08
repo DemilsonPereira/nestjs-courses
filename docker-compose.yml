@@ -1,6 +1,7 @@
 version: '3.1'
 
 services:
+  # Serviço do PostgreSQL
   db:
     image: postgres
     container_name: course-db
@@ -14,6 +15,15 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
 
+  # Serviço do Adminer (para PostgreSQL e MySQL)
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+
+  # Aplicação rodando dentro de um container
   app:
     build:
       context: .
